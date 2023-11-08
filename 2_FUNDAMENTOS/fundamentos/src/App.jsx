@@ -1,13 +1,24 @@
-import { useState } from 'react'
+// comentário geral
+
+import FirstComponent from './components/FirstComponent'
+
 
 import './App.css'
+import TemplateExpressions from './components/TemplateExpressions'
+import MyComponent from './components/MyComponent'
+import Events from './components/events'
+import Challenge from './components/Challenge'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1>fundamentos React</h1>
+      {/* comentário de código */}
+      <h1>fundamentos React</h1>      
+      <FirstComponent />
+      <TemplateExpressions />
+      <MyComponent />
+      <Events />
+      <Challenge />
     </>
   )
 }
