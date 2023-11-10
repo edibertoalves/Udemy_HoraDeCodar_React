@@ -13,24 +13,19 @@ function App() {
 
   return (
     <>
-      <div>
+      
         <h1>Avançando em React</h1>
         {/* Imagem em public */}
-        <div>
-          <img src="/paisagem_praia.jpg" alt="Paisagem de Praia" />
-        </div>
-
+        <img srcSet="/paisagem_praia.jpg" src="/paisagem_praia.jpg" alt="Paisagem de Praia" />
+        
         {/* Imagem em assets */}
-        <div>
-          <img src={ SkylineCity } alt="" srcset="" />
-        </div>
-        <div>
-          <ManageData />
-        </div>
-        <div>
-          <ListRender />
-        </div>
-      </div>
+        <img srcSet={ SkylineCity }  src={ SkylineCity }alt="" srcset="" />
+
+        <ManageData />
+
+        <ListRender />
+
+      
     </>
   );
 }

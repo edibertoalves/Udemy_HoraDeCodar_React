@@ -5,7 +5,8 @@ const ManageData = () => {
 
   console.log(someData)
 
-  const [number, setNumber] = useState(15);
+  { /* inicia a variavel com valor de 15 */}
+  const [number, setNumber] = useState(15)
 
   console.log(number)
 
