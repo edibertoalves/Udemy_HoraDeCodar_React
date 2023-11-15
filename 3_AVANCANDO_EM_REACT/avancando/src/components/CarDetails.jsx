@@ -1,5 +1,5 @@
 
-const CarDetails = ({brand, km, color}) => { /* destructuring nos parâmetros da funçao */
+const CarDetails = ({brand, km, color, newCar}) => { /* destructuring nos parâmetros da funçao */
   return (
     <div>
         <h2>Detalhes do Carro</h2>
@@ -8,6 +8,7 @@ const CarDetails = ({brand, km, color}) => { /* destructuring nos parâmetros da
             <li>Kilometragem: {km}</li>
             <li>Cor: {color}</li>
         </ul>
+        {newCar && <p>Este carro é novo</p>}
     </div>
   )
 }
