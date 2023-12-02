@@ -10,6 +10,8 @@ import ConditionalRender from "./components/ConditionalRender";
 import ShowUserName from "./components/ShowUserName";
 import CarDetails from "./components/CarDetails";
 import Fragment from "./components/Fragment";
+import Container from "./components/Container";
+import ExecuteFunction from "./components/ExecuteFunction";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -20,8 +22,12 @@ function App() {
   const cars = [
     {id: 1, brand: 'Ferrari', color: 'Amarela', newCar: true, km: 0},
     {id: 2, brand: 'BMW', color: 'Preta', newCar: false, km: 32157},
-    {id: 1, brand: 'Audi', color: 'Azul', newCar: false, km: 968420},
+    {id: 3, brand: 'Audi', color: 'Azul', newCar: false, km: 968420},
   ]
+
+  function showMessage() {
+    console.log("evento do componente pai")
+  }
 
   return (
     <>
@@ -54,10 +60,20 @@ function App() {
 
       {/* loop em array de objetos */}
       {cars.map((car) => (
-        <CarDetails brand={car.brand} km={car.km} color={car.color} newCar={car.newCar}/>        
+        <CarDetails key={car.id} brand={car.brand} km={car.km} color={car.color} newCar={car.newCar}/>        
       ))}
 
+      {/* fragment */}
       <Fragment propFragment="Teste Fragment"/>
+
+      {/* children */}
+      <Container myValue = "testando">
+        <p>e este é o conteúdo</p>  
+      </Container>
+
+      {/* executar função como props */}
+      <ExecuteFunction myFunction={showMessage}/>
+
     </>
   );
 }
