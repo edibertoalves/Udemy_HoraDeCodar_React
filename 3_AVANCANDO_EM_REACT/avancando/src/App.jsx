@@ -12,6 +12,8 @@ import CarDetails from "./components/CarDetails";
 import Fragment from "./components/Fragment";
 import Container from "./components/Container";
 import ExecuteFunction from "./components/ExecuteFunction";
+import Message from "./components/Message";
+import ChangeMessageState from "./components/ChangeMessageState";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -27,6 +29,12 @@ function App() {
 
   function showMessage() {
     console.log("evento do componente pai")
+  }
+
+  const [message, setMessage] = useState("")
+
+  const handleMessage = (msg) => {
+    setMessage(msg)
   }
 
   return (
@@ -50,7 +58,7 @@ function App() {
 
       {/* props */}
       <ShowUserName name={UserName} />
-      
+
       {/* destructuring */}
       <CarDetails brand="renault" km={87000} color="cinza" new={false} />
 
@@ -60,7 +68,7 @@ function App() {
 
       {/* loop em array de objetos */}
       {cars.map((car) => (
-        <CarDetails key={car.id} brand={car.brand} km={car.km} color={car.color} newCar={car.newCar}/>        
+        <CarDetails key={car.id} brand={car.brand} km={car.km} color={car.color} newCar={car.newCar}/>
       ))}
 
       {/* fragment */}
@@ -68,11 +76,15 @@ function App() {
 
       {/* children */}
       <Container myValue = "testando">
-        <p>e este é o conteúdo</p>  
+        <p>e este é o conteúdo</p>
       </Container>
 
       {/* executar função como props */}
       <ExecuteFunction myFunction={showMessage}/>
+
+      {/* state lift */}
+      <Message msg={message} />
+      <ChangeMessageState handleMessage={handleMessage} />
 
     </>
   );
