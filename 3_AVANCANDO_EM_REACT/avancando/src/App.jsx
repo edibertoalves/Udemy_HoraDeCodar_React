@@ -14,6 +14,7 @@ import Container from "./components/Container";
 import ExecuteFunction from "./components/ExecuteFunction";
 import Message from "./components/Message";
 import ChangeMessageState from "./components/ChangeMessageState";
+import UserDetails from "./components/UserDetails";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,6 +26,12 @@ function App() {
     {id: 1, brand: 'Ferrari', color: 'Amarela', newCar: true, km: 0},
     {id: 2, brand: 'BMW', color: 'Preta', newCar: false, km: 32157},
     {id: 3, brand: 'Audi', color: 'Azul', newCar: false, km: 968420},
+  ]
+
+  const Persons = [
+    {id: 1, nome: "João", idade: 17, profissao: "estagiário" },
+    {id: 2, nome: "Maria", idade: 30, profissao: "assistente administrativo" },
+    {id: 3, nome: "Manoel", idade: 22, profissao: "almoxarife" }    
   ]
 
   function showMessage() {
@@ -67,9 +74,10 @@ function App() {
       <CarDetails brand="Fiat" km={4500} color="branca" newCar={false} />
 
       {/* loop em array de objetos */}
-      {cars.map((car) => (
-        <CarDetails key={car.id} brand={car.brand} km={car.km} color={car.color} newCar={car.newCar}/>
-      ))}
+        {cars.map((car) => (
+          <CarDetails key={car.id} brand={car.brand} km={car.km} color={car.color} newCar={car.newCar}/>
+        ))
+      }
 
       {/* fragment */}
       <Fragment propFragment="Teste Fragment"/>
@@ -85,6 +93,13 @@ function App() {
       {/* state lift */}
       <Message msg={message} />
       <ChangeMessageState handleMessage={handleMessage} />
+
+      {/* Desafio  */}
+      {
+        Persons.map((person) => (
+         <UserDetails key={person.id} nome={person.nome} idade={person.idade} profissao={person.profissao} />  
+        ))
+      }
 
     </>
   );
