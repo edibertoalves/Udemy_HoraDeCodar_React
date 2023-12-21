@@ -25,8 +25,47 @@ function App() {
   const [gameStage, setGameStage] = useState(stages[0].name)
   const [words] = useState(wordsList)
 
+  const [pickedWord, setPickedWord] = useState('')
+  const [pickedCategory, setPickedCategory] = useState('')
+  const [letters, setLetters] = useState([])
+
+  const pickWordAndCategory = useCallback(() => {
+    // píck a random category
+    const categories = Object.keys(words)
+
+    //const category = categories[Math.floor(Math.random() * Object.keys(categories).length)]
+    const category = categories[Math.floor(Math.random() * Object.keys(categories).length)]
+
+    // test category with console.log
+    console.log(category)
+
+    // pick a random word
+    const word = words[category][Math.floor(Math.random() * words[category].length)]    
+
+    // test word with console.log
+    console.log(word)
+
+    return { category, word }
+
+  })
+
   // starts the secret word game
   const startGame = (() => {
+    // pick word and category
+    const { category, word } = pickWordAndCategory()
+
+    // create an array of letters and convert to lowercase
+    let wordLetters = word.split('')
+    wordLetters = wordLetters.map(letter => letter.toLowerCase())
+    
+    console.log(word, category)
+    console.log(wordLetters)
+
+    // fill states
+    setPickedWord(word)
+    setPickedCategory(category)
+    setLetters(letters)
+    
     setGameStage(stages[1].name)
   })
   
