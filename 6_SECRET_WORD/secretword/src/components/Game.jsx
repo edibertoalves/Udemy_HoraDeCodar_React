@@ -1,20 +1,41 @@
-import './Game.css'
+import "./Game.css";
 
 // implement the verifyLetter function
-const Game = ( {verifyLetter} ) => {
+const Game = ({
+  verifyLetter,
+  pickedWord,
+  pickedCategory,
+  letters,
+  guessedLetters,
+  wrongLetters,
+  guesses,
+  score,
+}) => {
+
+  // render the game
+  // return the game
   return (
-    <div className='game'>
+    <div className="game">
       <p className="points">
-        <span>Pontos:</span>
+        <span>Pontos: {score}</span>
       </p>
       <h1>Advinhe a palavra</h1>
       <h3 className="tip">
-        Dica sobre a palavra: <span>Dica... </span>
+        Dica sobre a palavra: <span>{pickedCategory}</span>
       </h3>
-      <p>Você ainda tem <span>XXX</span> tentativa(s).</p>
+      <p>
+        Você ainda tem <span>{guesses}</span> tentativa(s).
+      </p>
       <div className="wordContainer">
-        <span className='letter'>A</span>
-        <span className="blankSquare"></span>
+        {letters.map((letter, i) => {
+          return guessedLetters.includes(letter) ? (
+            <span key={i} className="letter">
+              {letter}
+            </span>
+          ) : (
+            <span key={i} className="blankSquare"></span>
+          );
+        })}
       </div>
       <div className="letterContainer">
         <p>Tente adivinhar uma letra da palavra:</p>
@@ -25,11 +46,12 @@ const Game = ( {verifyLetter} ) => {
       </div>
       <div className="wrongLetterContainer">
         <p>Letras ja utilizadas:</p>
-        <span>a,</span>
-        <span>b, </span>
+        {wrongLetters.map((letter, i) => {
+          return <span key={i}>{letter},</span>;
+        })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Game
+export default Game;
