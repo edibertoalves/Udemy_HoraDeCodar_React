@@ -1,4 +1,5 @@
 import "./Game.css";
+import { useState, useRef } from "react";
 
 // implement the verifyLetter function
 const Game = ({
@@ -11,6 +12,20 @@ const Game = ({
   guesses,
   score,
 }) => {
+  const [letter, setLetter] = useState("");
+  const letterInputRef = useRef(null);
+
+  // submit letter input
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    verifyLetter(letter);
+
+    setLetter("");
+
+    letterInputRef.current.focus();
+
+    
+  };
 
   // render the game
   // return the game
@@ -39,9 +54,17 @@ const Game = ({
       </div>
       <div className="letterContainer">
         <p>Tente adivinhar uma letra da palavra:</p>
-        <form>
-          <input type="text" name="letterInput" maxLength="1" />
-          <button onclick={verifyLetter}>Jogar</button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="letterInput"
+            maxLength="1"
+            required
+            onChange={(e) => setLetter(e.target.value)}
+            value={letter}
+            ref={letterInputRef}
+          />
+          <button onClick={verifyLetter}>Jogar</button>
         </form>
       </div>
       <div className="wrongLetterContainer">
