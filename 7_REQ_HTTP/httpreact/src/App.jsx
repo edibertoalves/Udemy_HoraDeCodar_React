@@ -1,52 +1,59 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
-const url = "http://localhost:3000/products"
+// 4 - custom hook
+import { useFetch } from "./hooks/useFetch";
+
+const url = "http://localhost:3000/products";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [products, setProducts] = useState([])
+  const [count, setCount] = useState(0);
+  const [products, setProducts] = useState([]);
 
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+
+  // 4 - custom hook
+  const { data : items } = useFetch(url);
 
   // 1 - resgatando dados da API
-  useEffect(() => {
-    async function fetchData() {
-      await fetch(url)
-        .then((response) => response.json())
-        .then((json) => setProducts(json))      
-    }
-    fetchData()
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     await fetch(url)
+  //       .then((response) => response.json())
+  //       .then((json) => setProducts(json))
+  //   }
+  //   fetchData()
 
-  }, [])
+  // }, [])
 
+  
 
   // 2 - adicionando dados da API
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     const product = {
       name,
-      price
-    }
-    
+      price,
+    };
+
     //  2 - adicionando dados da API
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),
-    })
+    });
 
     // 3 - carregamento dinâmico
-    const json = await response.json()
-    setProducts((prevProducts) => [...prevProducts, json])
-    
+    const json = await response.json();
+    setProducts((prevProducts) => [...prevProducts, json]); // spread operator
+
     //  limpa os campos
-    setName("")
-    setPrice("")
+    setName("");
+    setPrice("");
 
     // event.preventDefault()
     // const form = new FormData(event.target)
@@ -61,27 +68,30 @@ function App() {
     // const data = await response.json()
     // setProducts((prevProducts) => [...prevProducts, data])
     // event.target.reset()
-  }
+  };
 
   // 3 - excluindo dados da API
   const handleDelete = async (id) => {
     await fetch(`${url})/${id}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" }
-    })  
+      headers: { "Content-Type": "application/json" },
+    });
 
     // carregamento dinâmico dos dados após a exclusão
-    setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id))    
-  }
-  
+    setProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== id)
+    );
+  };
 
   return (
     <>
       <div>
         <h1>Lista de Produtos</h1>
         <ul>
-          {products.map((product) => (
-            <li key={product.id}>{product.name} - R$ {product.price}</li> 
+          {items && items.map((product) => (
+            <li key={product.id}>
+              {product.name} - R$ {product.price}
+            </li>
           ))}
         </ul>
       </div>
@@ -106,13 +116,12 @@ function App() {
               onChange={(event) => setPrice(event.target.value)}
             />
           </label>
-          
+
           <button type="submit">Adicionar</button>
         </form>
       </div>
-
     </>
-  )
+  );
 }
 
-export default App
+export default App;
