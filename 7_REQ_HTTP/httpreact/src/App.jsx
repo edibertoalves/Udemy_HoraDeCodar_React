@@ -16,7 +16,7 @@ function App() {
   const [price, setPrice] = useState("");
 
   // 4 - custom hook
-  const { data : items } = useFetch(url);
+  const { data: items, httpConfig, loading } = useFetch(url);
 
   // 1 - resgatando dados da API
   // useEffect(() => {
@@ -29,8 +29,6 @@ function App() {
 
   // }, [])
 
-  
-
   // 2 - adicionando dados da API
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,33 +39,21 @@ function App() {
     };
 
     //  2 - adicionando dados da API
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(product),
-    });
+    // const response = await fetch(url, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(product),
+    // });
 
-    // 3 - carregamento dinâmico
-    const json = await response.json();
-    setProducts((prevProducts) => [...prevProducts, json]); // spread operator
+    // // 3 - carregamento dinâmico
+    // const json = await response.json();
+    // setProducts((prevProducts) => [...prevProducts, json]); // spread operator
+
+    httpConfig(product, "POST");
 
     //  limpa os campos
     setName("");
     setPrice("");
-
-    // event.preventDefault()
-    // const form = new FormData(event.target)
-    // const name = form.get("name")
-    // const price = form.get("price")
-    // const json = JSON.stringify({ name, price })
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: json,
-    // })
-    // const data = await response.json()
-    // setProducts((prevProducts) => [...prevProducts, data])
-    // event.target.reset()
   };
 
   // 3 - excluindo dados da API
@@ -87,13 +73,18 @@ function App() {
     <>
       <div>
         <h1>Lista de Produtos</h1>
-        <ul>
-          {items && items.map((product) => (
-            <li key={product.id}>
-              {product.name} - R$ {product.price}
-            </li>
-          ))}
-        </ul>
+        {/* 6 - loading */}
+        {loading && <p>Carregando Dados...</p>}
+        {!loading && (
+          <ul>
+            {items &&
+              items.map((product) => (
+                <li key={product.id}>
+                  {product.name} - R$ {product.price}
+                </li>
+              ))}
+          </ul>
+        )}
       </div>
       {/* formulário para adicionar os produtos */}
       <div className="add-product">
