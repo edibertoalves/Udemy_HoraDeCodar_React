@@ -49,6 +49,21 @@
       "name": "suporte monitor ",
       "price": "90",
       "id": 10
+    },
+    {
+      "name": "suporte microfone",
+      "price": "25.00",
+      "id": 11
+    },
+    {
+      "name": "suporte microfone",
+      "price": "25.00",
+      "id": 12
+    },
+    {
+      "name": "suporte microfone 3max",
+      "price": "35.00",
+      "id": 13
     }
   ]
 }
