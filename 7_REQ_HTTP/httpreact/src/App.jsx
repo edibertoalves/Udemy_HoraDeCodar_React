@@ -38,17 +38,8 @@ function App() {
       price,
     };
 
-    //  2 - adicionando dados da API
-    // const response = await fetch(url, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(product),
-    // });
-
-    // // 3 - carregamento dinâmico
-    // const json = await response.json();
-    // setProducts((prevProducts) => [...prevProducts, json]); // spread operator
-
+    // 2 - adicionando dados da API
+    // 3 - carregamento dinâmico
     httpConfig(product, "POST");
 
     //  limpa os campos
@@ -56,18 +47,22 @@ function App() {
     setPrice("");
   };
 
-  // 3 - excluindo dados da API
-  const handleDelete = async (id) => {
-    await fetch(`${url})/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
+  // const handleDelete = async (id) => {
+  //   await fetch(`${url}/${id}`, {
+  //     method: "DELETE",
+  //     headers: { "Content-Type": "application/json" },
+  //   }).then((response) => {
+  //     if (response.status == 200) {
+  //       // atualiza o estado dos produtos
+  //       setProducts((prevProducts) => prevProducts.filter((product) => product.id !== id));
+  //     }
+  //   })
+  // };
 
-    // carregamento dinâmico dos dados após a exclusão
-    setProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== id)
-    );
-  };
+  // 8- desafio de exclusão de produtos
+  const handleRemove = async (id) => {
+    httpConfig(id, "DELETE");
+  }
 
   return (
     <>
@@ -82,6 +77,7 @@ function App() {
               items.map((product) => (
                 <li key={product.id}>
                   {product.name} - R$ {product.price}
+                  <button onClick={() => handleRemove(product.id)}>Remover</button>
                 </li>
               ))}
           </ul>
@@ -106,7 +102,7 @@ function App() {
               name="price"
               value={price}
               onChange={(event) => setPrice(event.target.value)}
-            />
+            />            
           </label>
 
           {/* 7 - state de loading no submit do botão */}

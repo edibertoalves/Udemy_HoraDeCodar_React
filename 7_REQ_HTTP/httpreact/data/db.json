@@ -16,19 +16,9 @@
       "price": 29.9
     },
     {
-      "name": "teste",
-      "price": "12",
-      "id": 4
-    },
-    {
       "name": "capa de chuva",
       "price": "40.40",
       "id": 5
-    },
-    {
-      "name": "novo teste",
-      "price": "9.99",
-      "id": 6
     },
     {
       "name": "Teste Post",
@@ -36,34 +26,19 @@
       "id": 7
     },
     {
-      "name": "Teste Post",
-      "price": "10.00",
-      "id": 8
-    },
-    {
-      "name": "Teste Post",
-      "price": "10.00",
-      "id": 9
-    },
-    {
       "name": "suporte monitor ",
       "price": "90",
       "id": 10
     },
     {
-      "name": "suporte microfone",
-      "price": "25.00",
+      "name": "suporte monitor 3Max",
+      "price": "110",
       "id": 11
     },
     {
-      "name": "suporte microfone",
-      "price": "25.00",
+      "name": "cabo de rede 15m",
+      "price": "12.99",
       "id": 12
-    },
-    {
-      "name": "suporte microfone 3max",
-      "price": "35.00",
-      "id": 13
     }
   ]
 }
